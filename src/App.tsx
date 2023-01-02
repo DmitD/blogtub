@@ -1,5 +1,10 @@
 import React from 'react'
+import { Header } from './common/components/header/header.component'
 
 export const App: React.FC = () => {
-	return <div className='text-3xl font-bold underline'>It works!!!</div>
+	return (
+		<div>
+			<Header />
+		</div>
+	)
 }
