@@ -5,14 +5,14 @@ import { Container } from '../container/container.component'
 
 export const Header: React.FC = () => {
 	const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
-		clsx('py-navItem', {
+		clsx('py-navItem hover:text-theme-blue/60', {
 			'text-theme-blue/30': !isActive,
 			'text-theme-blue/80': isActive,
 		})
 
 	return (
 		<header>
-			<nav className='px-2 py-4'>
+			<nav className='px-2 py-4 bg-white'>
 				<Container>
 					<div className='flex justify-between items-center'>
 						<Link

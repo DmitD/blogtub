@@ -3,7 +3,10 @@
 @tailwind utilities;
 
 @layer base {
-	html {
+	body {
 		font-family: 'Source Serif Pro', serif;
+		@apply bg-[#f9f9fe];
+		@apply tracking-wide;
+		@apply leading-loose;
 	}
 }
