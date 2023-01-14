@@ -1,5 +1,5 @@
 import React from 'react'
-import { Article } from '../article/article.component'
+import { Article } from '../article/article'
 
 export const ArticleList: React.FC = () => {
 	return (

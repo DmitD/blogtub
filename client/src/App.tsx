@@ -1,7 +1,7 @@
 import React from 'react'
-import { Banner } from './common/components/banner/banner.component'
-import { Header } from './common/components/header/header.component'
-import { Feed } from './modules/feed/components/feed/feed.component'
+import { Banner } from './common/components/banner/banner'
+import { Header } from './common/components/header/header'
+import { Feed } from './modules/feed/components/feed/feed'
 
 export const App: React.FC = () => {
 	return (

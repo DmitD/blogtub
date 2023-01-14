@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container } from '../container/container.component'
+import { Container } from '../container/container'
 
 export const Banner: React.FC = () => {
 	return (
