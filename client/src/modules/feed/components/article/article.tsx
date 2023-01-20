@@ -32,7 +32,7 @@ export const Article: React.FC<ArticleProps> = ({
 							to='/article'
 							className='font-josefin text-article font-bold text-theme-blue pb-1 pt-1 mb-1.5 hover:underline'
 						>
-							{title}
+							<h2>{title}</h2>
 						</Link>
 						<div className='text-article-gray text-data'>
 							<span className='mr-3'>

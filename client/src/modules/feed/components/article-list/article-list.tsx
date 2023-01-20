@@ -8,7 +8,7 @@ interface ArticleListProps {
 
 export const ArticleList: React.FC<ArticleListProps> = ({ list }) => {
 	return (
-		<div className='max-w-[728px] min-w-[728px]'>
+		<div>
 			{list.map(article => (
 				<Article key={article.slug} {...article} />
 			))}
