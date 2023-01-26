@@ -14,10 +14,13 @@ module.exports = {
 				article: '2.375rem',
 				data: '0.938rem',
 				pg: '1.063rem',
+				social: '1.563rem',
+				post: '0.813rem',
 			},
 			lineHeight: {
 				loose: '1.15',
 				pg: '1.8',
+				social: '4.5rem',
 			},
 			colors: {
 				theme: {
@@ -27,10 +30,18 @@ module.exports = {
 				article: {
 					gray: '#596172',
 				},
+				social: {
+					twitter: '#63cdf1',
+					facebook: '#3563c2',
+					inst: '#f7b454',
+					youtube: '#e62ba9',
+				},
 			},
 			spacing: {
 				navItem: '0.425rem',
 				artBottom: '4.375rem',
+				titleBottom: '1.875rem',
+				sectionBottom: '3.125rem',
 			},
 			boxShadow: {
 				banner:

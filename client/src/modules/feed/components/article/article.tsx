@@ -1,5 +1,5 @@
-import { DateTime } from 'luxon'
 import React from 'react'
+import { DateTime } from 'luxon'
 import { Link } from 'react-router-dom'
 import { FeedArticle } from '../../api/dto/global-feed.in'
 import { FavoriteButton } from '../favorite-button/favorite-button'
@@ -18,7 +18,7 @@ export const Article: React.FC<ArticleProps> = ({
 }) => {
 	return (
 		<article>
-			<div className='p-14 bg-white mx-auto mt-0 mb-artBottom relative'>
+			<div className='p-12 bg-white mx-auto mt-0 mb-artBottom relative'>
 				<div className='flex items-center'>
 					<Link to='/article'>
 						<img
@@ -30,7 +30,7 @@ export const Article: React.FC<ArticleProps> = ({
 					<div className='inline-flex flex-col ml-7'>
 						<Link
 							to='/article'
-							className='font-josefin text-article font-bold text-theme-blue pb-1 pt-1 mb-1.5 hover:underline'
+							className='font-josefin text-article font-bold text-theme-blue pb-1 pt-1 mb-1.5 hover:underline decoration-theme-green'
 						>
 							<h2>{title}</h2>
 						</Link>

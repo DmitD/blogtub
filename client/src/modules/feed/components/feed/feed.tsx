@@ -8,6 +8,8 @@ import { FEED_PAGE_SIZE } from '../../consts'
 import { useSearchParams } from 'react-router-dom'
 import { serializeSearchParams } from '../../../../utils/router'
 import { TagCloud } from '../tag-cloud/tag-cloud'
+import { Social } from '../social/social'
+import { RecentPosts } from '../recent-posts/recent-posts'
 
 export const Feed: React.FC = () => {
 	const [searchParams, setSearchParams] = useSearchParams()
@@ -19,7 +21,10 @@ export const Feed: React.FC = () => {
 		setSearchParams(serializeSearchParams({ page: String(selected) }))
 	}
 
-	const { data, error, isLoading, isFetching } = useGetGlobalFeedQuery({ page })
+	const { data, error, isLoading, isFetching } = useGetGlobalFeedQuery({
+		page,
+		tag: searchParams.get('tag'),
+	})
 
 	if (isLoading || isFetching) {
 		return <Container>Feed Loading...</Container>
@@ -35,7 +40,7 @@ export const Feed: React.FC = () => {
 			<div className='flex flex-row justify-between'>
 				<div className='max-w-[728px] min-w-[728px]'>
 					<ArticleList list={data?.articles || []} />
-					<nav className='mb-6'>
+					<nav>
 						<ReactPaginate
 							pageCount={(data?.articlesCount || 0) / FEED_PAGE_SIZE}
 							pageRangeDisplayed={3}
@@ -54,7 +59,9 @@ export const Feed: React.FC = () => {
 					</nav>
 				</div>
 				<div className='max-w-[368px] min-w-[368px]'>
+					<RecentPosts posts={data?.articles.slice(0, 4) || []} />
 					<TagCloud />
+					<Social />
 				</div>
 			</div>
 		</Container>

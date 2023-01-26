@@ -1,4 +1,4 @@
-export interface GlobalFeedIn {
+export interface GlobalFeedDTO {
 	articles: FeedArticle[]
 	articlesCount: number
 }

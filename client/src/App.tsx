@@ -5,7 +5,7 @@ import { Feed } from './modules/feed/components/feed/feed'
 
 export const App: React.FC = () => {
 	return (
-		<div>
+		<div className='pb-16'>
 			<Header />
 			<Banner />
 			<Feed />
