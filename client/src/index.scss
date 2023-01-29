@@ -4,7 +4,8 @@
 
 @layer base {
 	body {
-		font-family: 'Source Serif Pro', serif;
+		font-family: 'Josefin Sans', sans-serif;
+		@apply box-border;
 		@apply bg-[#f9f9fe];
 		@apply tracking-wide;
 		@apply leading-loose;

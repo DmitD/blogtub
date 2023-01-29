@@ -46,9 +46,9 @@ export const Feed: React.FC = () => {
 							pageRangeDisplayed={3}
 							previousLabel='<'
 							nextLabel='>'
-							containerClassName='flex justify-center text-theme-blue'
+							containerClassName='flex justify-center font-source text-theme-blue'
 							pageClassName='inline-block px-3 py-2'
-							pageLinkClassName='-ml-px text-theme-blue text-data'
+							pageLinkClassName='-ml-px text-theme-blue text-15px'
 							activeLinkClassName='opacity-50'
 							previousClassName='inline-block px-3 py-2'
 							nextClassName='inline-block px-3 py-2'

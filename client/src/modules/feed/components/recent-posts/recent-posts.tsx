@@ -8,10 +8,10 @@ interface RecentPostsProps {
 
 export const RecentPosts: React.FC<RecentPostsProps> = ({ posts }) => {
 	return (
-		<section className='font-josefin text-theme-blue mb-sectionBottom'>
-			<h4 className='font-bold text-2xl mb-titleBottom flex items-center'>
+		<section className='text-theme-blue mb-rightSectionBottom'>
+			<h4 className='flex items-center font-bold text-2xl mb-rightTitleBottom'>
 				<span>Recent posts</span>
-				<span className='h-0.5 min-w-[30px] ml-3.5 content-none bg-theme-green flex-auto'></span>
+				<span className='content-none bg-theme-green h-0.5 min-w-[30px] ml-3.5 flex-auto'></span>
 			</h4>
 			{posts.map(post => (
 				<Post

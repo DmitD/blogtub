@@ -1,14 +1,17 @@
 import React from 'react'
-import { Banner } from './common/components/banner/banner'
+import { Route, Routes } from 'react-router-dom'
 import { Header } from './common/components/header/header'
-import { Feed } from './modules/feed/components/feed/feed'
+import { GlobalFeedPage } from './modules/feed/pages/global-feed.page'
+import { ProfilePage } from './modules/profile/pages/profile.page'
 
 export const App: React.FC = () => {
 	return (
 		<div className='pb-16'>
 			<Header />
-			<Banner />
-			<Feed />
+			<Routes>
+				<Route path='/' element={<GlobalFeedPage />} />
+				<Route path='/:profile' element={<ProfilePage />} />
+			</Routes>
 		</div>
 	)
 }

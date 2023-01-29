@@ -18,7 +18,7 @@ export const Article: React.FC<ArticleProps> = ({
 }) => {
 	return (
 		<article>
-			<div className='p-12 bg-white mx-auto mt-0 mb-artBottom relative'>
+			<div className='bg-white p-12 mx-auto mt-0 mb-articleBottom relative'>
 				<div className='flex items-center'>
 					<Link to='/article'>
 						<img
@@ -30,11 +30,11 @@ export const Article: React.FC<ArticleProps> = ({
 					<div className='inline-flex flex-col ml-7'>
 						<Link
 							to='/article'
-							className='font-josefin text-article font-bold text-theme-blue pb-1 pt-1 mb-1.5 hover:underline decoration-theme-green'
+							className='text-38px font-bold text-theme-blue pb-1 pt-1 mb-1.5 hover:underline decoration-theme-green'
 						>
 							<h2>{title}</h2>
 						</Link>
-						<div className='text-article-gray text-data'>
+						<div className='text-15px font-source text-article-gray'>
 							<span className='mr-3'>
 								{DateTime.fromISO(createdAt).toLocaleString(DateTime.DATE_FULL)}
 							</span>
@@ -43,13 +43,13 @@ export const Article: React.FC<ArticleProps> = ({
 						</div>
 					</div>
 				</div>
-				<div className='mt-8 mb-14 text-article-gray text-pg break-words align-baseline leading-pg'>
+				<div className='text-17px font-source text-article-gray break-words align-baseline leading-pg mt-8 mb-14'>
 					<p>{description}…</p>
 				</div>
-				<div className='flex justify-between font-josefin text-theme-blue'>
+				<div className='flex justify-between text-theme-blue'>
 					<TagList list={tagList} />
 					<Link
-						to={`/@${author.username}`}
+						to={`/${author.username}`}
 						className='align-middle hover:text-theme-green'
 					>
 						<img
@@ -57,12 +57,12 @@ export const Article: React.FC<ArticleProps> = ({
 							alt={`${author.username} avatar`}
 							className='inline-block w-9 h-9 rounded-full shadow-author mr-2'
 						/>
-						<span className='text-data'>{author.username}</span>
+						<span className='text-15px'>{author.username}</span>
 					</Link>
 				</div>
-				<div className='absolute -bottom-2 left-1/2 -translate-x-2/4 z-10'>
+				<div className='text-15px text-white absolute -bottom-2 left-1/2 -translate-x-2/4 z-10'>
 					<Link to='/article'>
-						<span className='font-josefin text-data text-white bg-theme-blue hover:text-theme-green py-3 px-6'>
+						<span className='bg-theme-blue hover:text-theme-green py-3 px-6'>
 							Continue Reading
 						</span>
 					</Link>

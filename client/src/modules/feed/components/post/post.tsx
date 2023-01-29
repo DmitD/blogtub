@@ -11,7 +11,7 @@ interface PostProps {
 export const Post: React.FC<PostProps> = ({ title, createdAt, author }) => {
 	return (
 		<div className=' text-theme-blue mb-5'>
-			<div className='font-josefin text-post font-bold mb-2'>
+			<div className='text-13px font-bold mb-2'>
 				<Link
 					to={`/@${author}`}
 					className='align-middle hover:text-theme-green'
@@ -24,7 +24,7 @@ export const Post: React.FC<PostProps> = ({ title, createdAt, author }) => {
 					<span>{author}</span>
 				</Link>
 			</div>
-			<div className='font-josefin text-data font-bold  mb-2'>
+			<div className='text-15px font-bold mb-2'>
 				<Link
 					to='/article'
 					className='pt-1 hover:underline decoration-theme-green'
@@ -32,7 +32,7 @@ export const Post: React.FC<PostProps> = ({ title, createdAt, author }) => {
 					<h4 className='leading-6'>{title}</h4>
 				</Link>
 			</div>
-			<div className='text-article-gray text-xs'>
+			<div className='text-xs text-article-gray'>
 				<span>
 					{DateTime.fromISO(createdAt).toLocaleString(DateTime.DATE_FULL)}
 				</span>

@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
 	content: ['./src/**/*.{js,jsx,ts,tsx}'],
 	theme: {
@@ -7,15 +8,15 @@ module.exports = {
 				padding: '2.5rem',
 			},
 			fontFamily: {
-				josefin: ['Josefin Sans', 'sans-serif'],
+				source: ['Source Serif Pro', 'serif'],
 			},
 			fontSize: {
-				banner: '3.5rem',
-				article: '2.375rem',
-				data: '0.938rem',
-				pg: '1.063rem',
-				social: '1.563rem',
-				post: '0.813rem',
+				'56px': '3.5rem',
+				'38px': '2.375rem',
+				'25px': '1.563rem',
+				'17px': '1.063rem',
+				'15px': '0.938rem',
+				'13px': '0.813rem',
 			},
 			lineHeight: {
 				loose: '1.15',
@@ -38,16 +39,18 @@ module.exports = {
 				},
 			},
 			spacing: {
-				navItem: '0.425rem',
-				artBottom: '4.375rem',
-				titleBottom: '1.875rem',
-				sectionBottom: '3.125rem',
+				headerNavItem: '0.425rem',
+				articleBottom: '4.375rem',
+				rightTitleBottom: '1.875rem',
+				rightSectionBottom: '3.125rem',
 			},
 			boxShadow: {
 				banner:
 					'inset 0 8px 8px -8px rgb(0 0 0 / 30%), inset 0 -8px 8px -8px rgb(0 0 0 / 30%)',
 				author: '0px 3px 5px -1px rgb(7 10 25 / 20%)',
 				tag: '0px 2px 6px rgb(7 10 25 / 10%)',
+				profileBanner:
+					'0 3px 12px -1px rgb(7 10 25 / 10%), 0 22px 27px -30px rgb(7 10 25 / 10%)',
 			},
 			dropShadow: {
 				banner: '0px 1px 3px rgb(0 0 0 / 30%)',
