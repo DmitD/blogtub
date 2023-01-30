@@ -1,12 +1,18 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { axiosBaseQuery } from '../../../core/axios-base-query'
+import { transformResponse } from './utils'
 import { FEED_PAGE_SIZE } from '../consts'
-import { GlobalFeedDTO } from './dto/global-feed.in'
+import { GlobalFeedDTO, FeedArticle } from './dto/global-feed.in'
 import { TagCloudDTO } from './dto/tag-cloud.in'
 
 interface GlobalFeedParams {
 	page: number
 	tag: string | null
+}
+
+export interface FeedData {
+	articles: FeedArticle[]
+	articlesCount: number
 }
 
 export const feedApi = createApi({
@@ -15,7 +21,7 @@ export const feedApi = createApi({
 		baseUrl: 'https://api.realworld.io/api',
 	}),
 	endpoints: builder => ({
-		getGlobalFeed: builder.query<GlobalFeedDTO, GlobalFeedParams>({
+		getGlobalFeed: builder.query<FeedData, GlobalFeedParams>({
 			query: ({ page, tag }) => ({
 				url: '/articles',
 				method: 'get',
@@ -25,6 +31,7 @@ export const feedApi = createApi({
 					tag,
 				},
 			}),
+			transformResponse,
 		}),
 		getTagCloud: builder.query<TagCloudDTO, any>({
 			query: () => ({

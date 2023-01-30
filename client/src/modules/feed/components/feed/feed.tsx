@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactPaginate from 'react-paginate'
 import { Container } from '../../../../common/components/container/container'
-import { useGetGlobalFeedQuery } from '../../api/repository'
+import { FeedData } from '../../api/repository'
 import { ArticleList } from '../article-list/article-list'
 import { FeedToggle } from '../feed-toggle/feed-toggle'
 import { FEED_PAGE_SIZE } from '../../consts'
@@ -11,20 +11,25 @@ import { TagCloud } from '../tag-cloud/tag-cloud'
 import { Social } from '../social/social'
 import { RecentPosts } from '../recent-posts/recent-posts'
 
-export const Feed: React.FC = () => {
+interface FeedProps {
+	data?: FeedData
+	error: any
+	isLoading: boolean
+	isFetching: boolean
+}
+
+export const Feed: React.FC<FeedProps> = ({
+	data,
+	error,
+	isLoading,
+	isFetching,
+}) => {
 	const [searchParams, setSearchParams] = useSearchParams()
-	const [page, setPage] = React.useState(
-		searchParams.get('page') ? Number(searchParams.get('page')) : 0
-	)
+	const page = searchParams.get('page') ? Number(searchParams.get('page')) : 0
+
 	const handleChangePage = ({ selected }: { selected: number }) => {
-		setPage(selected)
 		setSearchParams(serializeSearchParams({ page: String(selected) }))
 	}
-
-	const { data, error, isLoading, isFetching } = useGetGlobalFeedQuery({
-		page,
-		tag: searchParams.get('tag'),
-	})
 
 	if (isLoading || isFetching) {
 		return <Container>Feed Loading...</Container>
@@ -36,9 +41,9 @@ export const Feed: React.FC = () => {
 
 	return (
 		<Container>
-			<FeedToggle />
 			<div className='flex flex-row justify-between'>
 				<div className='max-w-[728px] min-w-[728px]'>
+					<FeedToggle />
 					<ArticleList list={data?.articles || []} />
 					<nav>
 						<ReactPaginate
