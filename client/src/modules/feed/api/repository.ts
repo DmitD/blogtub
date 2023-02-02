@@ -1,5 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
-import { axiosBaseQuery } from '../../../core/axios-base-query'
+import { blogtubBaseQuery } from '../../../core/blogtub-base-query'
 import { transformResponse } from './utils'
 import { FEED_PAGE_SIZE } from '../consts'
 import { FeedArticle } from './dto/global-feed.in'
@@ -25,9 +25,7 @@ interface ProfileFeedParams extends BaseFeedParams {
 
 export const feedApi = createApi({
 	reducerPath: 'feedApi',
-	baseQuery: axiosBaseQuery({
-		baseUrl: 'https://api.realworld.io/api',
-	}),
+	baseQuery: blogtubBaseQuery,
 	endpoints: builder => ({
 		getGlobalFeed: builder.query<FeedData, GlobalFeedParams>({
 			query: ({ page, tag }) => ({

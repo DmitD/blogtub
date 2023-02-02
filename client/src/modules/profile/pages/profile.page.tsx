@@ -5,6 +5,7 @@ import { useGetProfileFeedQuery } from '../../feed/api/repository'
 import { FeedToggle } from '../../feed/components/feed-toggle/feed-toggle'
 import { Feed } from '../../feed/components/feed/feed'
 import { usePageParam } from '../../feed/hooks/use-page-param'
+import { useGetProfileQuery } from '../api/repository'
 import { ProfileInfo } from '../components/profile-info/profile-info'
 
 interface ProfilePageProps {}
@@ -13,6 +14,10 @@ export const ProfilePage: React.FC = () => {
 	const { page } = usePageParam()
 	const { profile } = useParams()
 	const { pathname } = useLocation()
+
+	const { data: profileData, isLoading: profileLoading } = useGetProfileQuery({
+		username: profile!,
+	})
 
 	const { data, isLoading, isFetching, error } = useGetProfileFeedQuery({
 		page,
@@ -26,6 +31,10 @@ export const ProfilePage: React.FC = () => {
 			link: `/${encodeURIComponent(profile!)}/favorites`,
 		},
 	]
+
+	if (profileLoading) {
+		return null
+	}
 
 	return (
 		<Container>
@@ -44,7 +53,7 @@ export const ProfilePage: React.FC = () => {
 					/>
 				</div>
 				<div className='max-w-[368px] min-w-[368px]'>
-					<ProfileInfo />
+					<ProfileInfo profile={profileData!.profile} />
 				</div>
 			</div>
 		</Container>
