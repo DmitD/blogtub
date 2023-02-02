@@ -25,11 +25,21 @@ export const Feed: React.FC<FeedProps> = ({
 	}
 
 	if (isLoading || isFetching) {
-		return <p>Feed Loading...</p>
+		return <p className='text-center text-theme-blue'>Feed Loading...</p>
 	}
 
 	if (error) {
-		return <p>Error while loading feed</p>
+		return (
+			<p className='text-center text-theme-blue'>Error while loading feed</p>
+		)
+	}
+
+	if (data?.articlesCount === 0) {
+		return (
+			<p className='text-center text-theme-blue'>
+				No articles are here... yet.
+			</p>
+		)
 	}
 
 	return (

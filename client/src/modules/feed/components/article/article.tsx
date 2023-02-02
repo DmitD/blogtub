@@ -49,7 +49,7 @@ export const Article: React.FC<ArticleProps> = ({
 				<div className='flex justify-between text-theme-blue'>
 					<TagList list={tagList} />
 					<Link
-						to={`/${author.username}`}
+						to={`/${encodeURIComponent(author.username)}`}
 						className='align-middle hover:text-theme-green'
 					>
 						<img
