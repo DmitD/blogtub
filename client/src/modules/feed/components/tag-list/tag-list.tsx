@@ -17,7 +17,7 @@ export const TagList: React.FC<TagListProps> = ({
 	tagStyle = TagListStyle.LIST,
 }) => {
 	const tagClasses = clsx(
-		'inline-block text-sm bg-white mr-2.5 px-2 pt-1.5 pb-1 shadow-tag hover:text-theme-green',
+		'inline-block text-sm text-theme-blue bg-white mr-2.5 px-2 pt-1.5 pb-1 shadow-tag hover:text-theme-green',
 		{ 'mb-3': tagStyle === TagListStyle.CLOUD }
 	)
 

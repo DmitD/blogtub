@@ -49,7 +49,7 @@ module.exports = {
 					'inset 0 8px 8px -8px rgb(0 0 0 / 30%), inset 0 -8px 8px -8px rgb(0 0 0 / 30%)',
 				author: '0px 3px 5px -1px rgb(7 10 25 / 20%)',
 				tag: '0px 2px 6px rgb(7 10 25 / 10%)',
-				profileBanner:
+				articlePage:
 					'0 3px 12px -1px rgb(7 10 25 / 10%), 0 22px 27px -30px rgb(7 10 25 / 10%)',
 			},
 			dropShadow: {

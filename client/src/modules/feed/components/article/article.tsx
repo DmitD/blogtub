@@ -15,10 +15,12 @@ export const Article: React.FC<ArticleProps> = ({
 	description,
 	favoritesCount,
 	tagList,
+	slug,
+	body,
 }) => {
 	return (
 		<article>
-			<div className='bg-white p-12 mx-auto mt-0 mb-articleBottom relative'>
+			<div className='bg-white shadow-articlePage p-12 mx-auto mt-0 mb-articleBottom relative'>
 				<div className='flex items-center'>
 					<Link to='/article'>
 						<img
@@ -38,7 +40,7 @@ export const Article: React.FC<ArticleProps> = ({
 							<span className='mr-3'>
 								{DateTime.fromISO(createdAt).toLocaleString(DateTime.DATE_FULL)}
 							</span>
-							<ReadingTime />
+							<ReadingTime article={body} />
 							<FavoriteButton count={favoritesCount} />
 						</div>
 					</div>
@@ -61,7 +63,7 @@ export const Article: React.FC<ArticleProps> = ({
 					</Link>
 				</div>
 				<div className='text-15px text-white absolute -bottom-2 left-1/2 -translate-x-2/4 z-10'>
-					<Link to='/article'>
+					<Link to={`/article/${encodeURIComponent(slug)}`}>
 						<span className='bg-theme-blue hover:text-theme-green py-3 px-6'>
 							Continue Reading
 						</span>
