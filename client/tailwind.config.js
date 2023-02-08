@@ -27,6 +27,7 @@ module.exports = {
 				theme: {
 					blue: '#4b4870',
 					green: '#00d082',
+					darkGreen: '#059660',
 				},
 				article: {
 					gray: '#596172',

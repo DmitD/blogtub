@@ -4,6 +4,7 @@ import { Container } from '../../../common/components/container/container'
 import { ProfileInfo } from '../../profile/components/profile-info/profile-info'
 import { useGetArticleQuery } from '../api/repository'
 import { ArticleBanner } from '../components/article-banner/article-banner'
+import { CommentsList } from '../components/comments-list/comments-list'
 import { TagList } from '../components/tag-list/tag-list'
 
 export const ArticlePage: React.FC = () => {
@@ -46,6 +47,7 @@ export const ArticlePage: React.FC = () => {
 						></p>
 						<TagList list={data.article.tagList} />
 					</div>
+					<CommentsList />
 				</div>
 				<div className='max-w-[368px] min-w-[368px]'>
 					<ProfileInfo profile={data.article.author} />

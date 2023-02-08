@@ -23,7 +23,7 @@ export const ArticleBanner: React.FC<ArticleBannerProps> = ({
 			</h2>
 			<div className='text-15px font-source text-center text-article-gray'>
 				<span className='mr-3'>
-					{DateTime.fromISO(createdAt).toLocaleString(DateTime.DATE_FULL)}
+					{DateTime.fromISO(createdAt).toLocaleString(DateTime.DATE_SHORT)}
 				</span>
 				<ReadingTime article={body} />
 				<FavoriteButton count={favoritesCount} />

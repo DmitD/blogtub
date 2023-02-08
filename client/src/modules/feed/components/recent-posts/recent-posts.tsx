@@ -1,6 +1,7 @@
 import React from 'react'
 import { FeedArticle } from '../../api/dto/global-feed.in'
 import { Post } from '../post/post'
+import { SectionTitle } from '../section-title/section-title'
 
 interface RecentPostsProps {
 	posts: FeedArticle[]
@@ -9,10 +10,7 @@ interface RecentPostsProps {
 export const RecentPosts: React.FC<RecentPostsProps> = ({ posts }) => {
 	return (
 		<section className='text-theme-blue mb-rightSectionBottom'>
-			<h4 className='flex items-center font-bold text-2xl mb-rightTitleBottom'>
-				<span>Recent posts</span>
-				<span className='content-none bg-theme-green h-0.5 min-w-[30px] ml-3.5 flex-auto'></span>
-			</h4>
+			<SectionTitle title='Recent posts' />
 			{posts.map(post => (
 				<Post
 					key={post.slug}

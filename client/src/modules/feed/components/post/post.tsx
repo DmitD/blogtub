@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { DateTime } from 'luxon'
+import { Author } from '../author/author'
 
 interface PostProps {
 	title: string
@@ -11,17 +12,12 @@ interface PostProps {
 export const Post: React.FC<PostProps> = ({ title, createdAt, author }) => {
 	return (
 		<div className=' text-theme-blue mb-5'>
-			<div className='text-13px font-bold mb-2'>
+			<div className='mb-2'>
 				<Link
 					to={`/@${author}`}
 					className='align-middle hover:text-theme-green'
 				>
-					<img
-						src='https://themes.estudiopatagon.com/wordpress/maktub/wp-content/uploads/2022/05/avatar-10.jpg'
-						alt={`${author} avatar`}
-						className='inline-block w-[20px] h-[20px] rounded-full shadow-author mr-2'
-					/>
-					<span>{author}</span>
+					<Author name={author} authorStyle='SMALL' />
 				</Link>
 			</div>
 			<div className='text-15px font-bold mb-2'>
@@ -34,7 +30,7 @@ export const Post: React.FC<PostProps> = ({ title, createdAt, author }) => {
 			</div>
 			<div className='text-xs text-article-gray'>
 				<span>
-					{DateTime.fromISO(createdAt).toLocaleString(DateTime.DATE_FULL)}
+					{DateTime.fromISO(createdAt).toLocaleString(DateTime.DATE_SHORT)}
 				</span>
 			</div>
 		</div>
