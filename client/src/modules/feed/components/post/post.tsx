@@ -11,7 +11,7 @@ interface PostProps {
 
 export const Post: React.FC<PostProps> = ({ title, createdAt, author }) => {
 	return (
-		<div className=' text-theme-blue mb-5'>
+		<div className='mb-5'>
 			<div className='mb-2'>
 				<Link
 					to={`/@${author}`}

@@ -18,7 +18,7 @@ export const CommentsList: React.FC<CommentsListProps> = () => {
 	if (!data) {
 		return (
 			<div className='bg-white shadow-articlePage p-12'>
-				<p className='text-theme-blue mb-8'>
+				<p className='mb-8'>
 					<Link
 						to='/sign-in'
 						className='text-theme-green hover:text-theme-darkGreen'
@@ -34,7 +34,7 @@ export const CommentsList: React.FC<CommentsListProps> = () => {
 					</Link>{' '}
 					to add comments on this article.
 				</p>
-				<p className='text-theme-blue'>No comments found</p>
+				<p>No comments found</p>
 			</div>
 		)
 	}
@@ -43,7 +43,7 @@ export const CommentsList: React.FC<CommentsListProps> = () => {
 		<div className='bg-white shadow-articlePage p-12'>
 			<SectionTitle title='Comments' />
 			<div className='flex flex-col gap-8'>
-				<p className='text-theme-blue'>
+				<p>
 					<Link
 						to='/sign-in'
 						className='text-theme-green hover:text-theme-darkGreen'

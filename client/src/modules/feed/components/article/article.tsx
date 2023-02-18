@@ -33,7 +33,7 @@ export const Article: React.FC<ArticleProps> = ({
 					<div className='inline-flex flex-col ml-7'>
 						<Link
 							to={`/article/${encodeURIComponent(slug)}`}
-							className='text-38px font-bold text-theme-blue pb-1 pt-1 mb-1.5 hover:underline decoration-theme-green'
+							className='text-38px font-bold pb-1 pt-1 mb-1.5 hover:underline decoration-theme-green'
 						>
 							<h2>{title}</h2>
 						</Link>
@@ -51,7 +51,7 @@ export const Article: React.FC<ArticleProps> = ({
 				<div className='text-17px font-source text-article-gray break-words align-baseline leading-pg mt-8 mb-14'>
 					<p>{description}…</p>
 				</div>
-				<div className='flex justify-between text-theme-blue'>
+				<div className='flex justify-between'>
 					<TagList list={tagList} />
 					<Link
 						to={`/${encodeURIComponent(author.username)}`}

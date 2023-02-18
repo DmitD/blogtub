@@ -8,7 +8,7 @@ export const TagCloud: React.FC = () => {
 
 	if (isLoading || isFetching) {
 		return (
-			<section className='text-theme-blue mb-rightSectionBottom'>
+			<section className='mb-rightSectionBottom'>
 				<SectionTitle title='Loading Tag Cloud...' />
 			</section>
 		)
@@ -16,14 +16,14 @@ export const TagCloud: React.FC = () => {
 
 	if (error) {
 		return (
-			<section className='text-theme-blue mb-rightSectionBottom'>
+			<section className='mb-rightSectionBottom'>
 				<SectionTitle title='Error while loading tags' />
 			</section>
 		)
 	}
 
 	return (
-		<section className='text-theme-blue mb-rightSectionBottom'>
+		<section className='mb-rightSectionBottom'>
 			<SectionTitle title='Tag Cloud' />
 			<TagList list={data!.tags} tagStyle='CLOUD' />
 		</section>

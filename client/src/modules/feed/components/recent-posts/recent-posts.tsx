@@ -9,7 +9,7 @@ interface RecentPostsProps {
 
 export const RecentPosts: React.FC<RecentPostsProps> = ({ posts }) => {
 	return (
-		<section className='text-theme-blue mb-rightSectionBottom'>
+		<section className='mb-rightSectionBottom'>
 			<SectionTitle title='Recent posts' />
 			{posts.map(post => (
 				<Post

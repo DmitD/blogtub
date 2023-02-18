@@ -33,7 +33,7 @@ export const FeedToggle: React.FC<FeedToggleProps> = ({
 
 	return (
 		<div className='mb-8'>
-			<ul className='text-15px text-theme-blue'>
+			<ul className='text-15px'>
 				<NavLink to={defaultLink} className={liClasses} end>
 					<li>{defaultText}</li>
 				</NavLink>

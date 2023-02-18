@@ -18,7 +18,7 @@ export const ArticleBanner: React.FC<ArticleBannerProps> = ({
 }) => {
 	return (
 		<div>
-			<h2 className='text-3xl text-center font-bold text-theme-blue pb-1 pt-1 mb-1.5'>
+			<h2 className='text-3xl text-center font-bold pb-1 pt-1 mb-1.5'>
 				{title}
 			</h2>
 			<div className='text-15px font-source text-center text-article-gray'>

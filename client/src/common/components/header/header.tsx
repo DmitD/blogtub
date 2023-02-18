@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import clsx from 'clsx'
 import { Container } from '../container/container'
+import { useAuth } from '../../../modules/auth/hooks/use-auth'
 
 export const Header: React.FC = () => {
 	const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
@@ -10,12 +11,14 @@ export const Header: React.FC = () => {
 			'text-theme-blue/80': isActive,
 		})
 
+	const { isLoggedIn, logOut } = useAuth()
+
 	return (
 		<header>
 			<nav className='px-2 py-4 bg-white'>
 				<Container>
 					<div className='flex justify-between items-center'>
-						<Link to='/' className='text-2xl text-theme-blue font-bold mr-8'>
+						<Link to='/' className='text-2xl font-bold mr-8'>
 							Blogtub
 						</Link>
 						<ul className='flex font-source list-none pl-0 mb-0'>
@@ -24,16 +27,32 @@ export const Header: React.FC = () => {
 									Home
 								</NavLink>
 							</li>
-							<li className='ml-4'>
-								<NavLink to='/sign-in' className={navLinkClasses}>
-									Sign in
-								</NavLink>
-							</li>
-							<li className='ml-4'>
-								<NavLink to='/sign-up' className={navLinkClasses}>
-									Sign up
-								</NavLink>
-							</li>
+							{isLoggedIn ? (
+								<>
+									<li className='ml-4'>
+										<NavLink
+											to='/sign-in'
+											className='py-headerNavItem hover:text-theme-blue/60'
+											onClick={logOut}
+										>
+											Log out
+										</NavLink>
+									</li>
+								</>
+							) : (
+								<>
+									<li className='ml-4'>
+										<NavLink to='/sign-in' className={navLinkClasses}>
+											Sign in
+										</NavLink>
+									</li>
+									<li className='ml-4'>
+										<NavLink to='/sign-up' className={navLinkClasses}>
+											Sign up
+										</NavLink>
+									</li>
+								</>
+							)}
 						</ul>
 					</div>
 				</Container>

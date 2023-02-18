@@ -24,9 +24,7 @@ export const CommentItem: React.FC<CommentItemProps> = ({
 			</div>
 			<div className='ml-5'>
 				<p className='text-15px mb-2.5'>
-					<span className='font-bold text-theme-blue mr-2.5'>
-						{author.username}
-					</span>
+					<span className='font-bold mr-2.5'>{author.username}</span>
 					<span className='font-source text-article-gray'>
 						{DateTime.fromISO(createdAt).toLocaleString(DateTime.DATE_SHORT)}
 					</span>

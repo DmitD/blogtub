@@ -1,17 +1,49 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import type { TypedUseSelectorHook } from 'react-redux'
 import { useDispatch, useSelector } from 'react-redux'
+import {
+	persistStore,
+	persistReducer,
+	FLUSH,
+	REHYDRATE,
+	PAUSE,
+	PERSIST,
+	PURGE,
+	REGISTER,
+} from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import { authApi } from '../modules/auth/api/reposritory'
+import { authSlice } from '../modules/auth/service/auth.slice'
 import { feedApi } from '../modules/feed/api/repository'
 import { profileApi } from '../modules/profile/api/repository'
 
-export const store = configureStore({
-	reducer: {
+const persistConfig = {
+	key: 'blogtub',
+	storage,
+	whitelist: [authSlice.name],
+}
+
+const persistentReducer = persistReducer(
+	persistConfig,
+	combineReducers({
 		[feedApi.reducerPath]: feedApi.reducer,
 		[profileApi.reducerPath]: profileApi.reducer,
-	},
+		[authApi.reducerPath]: authApi.reducer,
+		[authSlice.name]: authSlice.reducer,
+	})
+)
+
+export const store = configureStore({
+	reducer: persistentReducer,
 	middleware: getDefaultMiddleware =>
-		getDefaultMiddleware().concat(feedApi.middleware, profileApi.middleware),
+		getDefaultMiddleware({
+			serializableCheck: {
+				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+			},
+		}).concat(feedApi.middleware, profileApi.middleware, authApi.middleware),
 })
+
+export const persistedStore = persistStore(store)
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch

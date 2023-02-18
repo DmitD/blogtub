@@ -23,7 +23,7 @@ export const ArticlePage: React.FC = () => {
 	if (!data) {
 		return (
 			<Container>
-				<p className='text-theme-blue mt-12'>Article not found</p>
+				<p className='mt-12'>Article not found</p>
 			</Container>
 		)
 	}

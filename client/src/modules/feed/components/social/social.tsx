@@ -4,7 +4,7 @@ import { SectionTitle } from '../section-title/section-title'
 
 export const Social: React.FC = () => {
 	return (
-		<section className='text-theme-blue'>
+		<section>
 			<SectionTitle title='Section' />
 			<div className='flex justify-between text-25px'>
 				<a

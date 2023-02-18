@@ -1,3 +1,5 @@
+@import '~react-toastify/dist/ReactToastify.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,9 +7,10 @@
 @layer base {
 	body {
 		font-family: 'Josefin Sans', sans-serif;
+		@apply text-theme-blue;
 		@apply box-border;
 		@apply bg-[#f9f9fe];
 		@apply tracking-wide;
-		@apply leading-loose;
+		@apply leading-tight;
 	}
 }

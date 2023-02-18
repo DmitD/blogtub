@@ -25,21 +25,15 @@ export const Feed: React.FC<FeedProps> = ({
 	}
 
 	if (isLoading || isFetching) {
-		return <p className='text-center text-theme-blue'>Feed Loading...</p>
+		return <p className='text-center'>Feed Loading...</p>
 	}
 
 	if (error) {
-		return (
-			<p className='text-center text-theme-blue'>Error while loading feed</p>
-		)
+		return <p className='text-center'>Error while loading feed</p>
 	}
 
 	if (data?.articlesCount === 0) {
-		return (
-			<p className='text-center text-theme-blue'>
-				No articles are here... yet.
-			</p>
-		)
+		return <p className='text-center'>No articles are here... yet.</p>
 	}
 
 	return (
@@ -47,13 +41,13 @@ export const Feed: React.FC<FeedProps> = ({
 			<ArticleList list={data?.articles || []} />
 			<nav>
 				<ReactPaginate
-					pageCount={(data?.articlesCount || 0) / FEED_PAGE_SIZE}
+					pageCount={Math.ceil((data?.articlesCount || 0) / FEED_PAGE_SIZE)}
 					pageRangeDisplayed={3}
 					previousLabel='<'
 					nextLabel='>'
-					containerClassName='flex justify-center font-source text-theme-blue'
+					containerClassName='flex justify-center font-source'
 					pageClassName='inline-block px-3 py-2'
-					pageLinkClassName='-ml-px text-theme-blue text-15px'
+					pageLinkClassName='-ml-px text-15px'
 					activeLinkClassName='opacity-50'
 					previousClassName='inline-block px-3 py-2'
 					nextClassName='inline-block px-3 py-2'

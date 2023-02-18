@@ -28,6 +28,8 @@ module.exports = {
 					blue: '#4b4870',
 					green: '#00d082',
 					darkGreen: '#059660',
+					lightGray: '#b6a3af',
+					red: '#d52f48',
 				},
 				article: {
 					gray: '#596172',
