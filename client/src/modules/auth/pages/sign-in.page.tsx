@@ -2,7 +2,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
+import * as Yup from 'yup'
 import { toast } from 'react-toastify'
 import { Container } from '../../../common/components/container/container'
 import { AuthInput } from '../components/auth-input'
@@ -14,9 +14,11 @@ interface SignInFormValues {
 	password: string
 }
 
-const validationSchema = yup.object({
-	email: yup.string().required().email(),
-	password: yup.string().required().min(6),
+const validationSchema = Yup.object({
+	email: Yup.string()
+		.required('email is required')
+		.email('email is must be a valid email address'),
+	password: Yup.string().required().min(6),
 })
 
 export const SignInPage: React.FC = () => {
@@ -43,6 +45,8 @@ export const SignInPage: React.FC = () => {
 			toast.error('Something went wrong. Please, try again.')
 		}
 	}
+
+	console.log('=== formState sign-in.page.tsx [54] ===', formState)
 
 	return (
 		<Container>

@@ -27,6 +27,7 @@ export const AuthInput = React.forwardRef<HTMLInputElement, AuthInputProps>(
 			half,
 			handleShowPassword,
 			authInputStyle = AuthInputStyle.WHOLE,
+			...inputProps
 		},
 		ref
 	) => {
@@ -43,6 +44,7 @@ export const AuthInput = React.forwardRef<HTMLInputElement, AuthInputProps>(
 					name={name}
 					placeholder={placeholder}
 					type={type}
+					{...inputProps}
 					className='border border-theme-blue/10 rounded px-3.5 py-4 w-full'
 				/>
 				{name === 'password' ? (

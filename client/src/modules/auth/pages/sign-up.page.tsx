@@ -18,7 +18,7 @@ interface SignUpFormValues {
 }
 
 const validationSchema = yup.object({
-	firstName: yup.string().required().min(2),
+	firstName: yup.string().required().min(2).max(120).label('First name'),
 	lastName: yup.string().default(''),
 	email: yup.string().required().email(),
 	password: yup.string().required().min(6),
@@ -76,13 +76,13 @@ export const SignUpPage: React.FC = () => {
 					noValidate
 				>
 					<AuthInput
-						placeholder='First Name*'
+						placeholder='First name*'
 						type='text'
 						authInputStyle='HALF'
 						{...register('firstName')} //register for working with ref (uncontrolled input)
 					/>
 					<AuthInput
-						placeholder='Last Name'
+						placeholder='Last name'
 						type='text'
 						authInputStyle='HALF'
 						{...register('lastName')}
@@ -95,7 +95,7 @@ export const SignUpPage: React.FC = () => {
 						{...register('password')}
 					/>
 					<AuthInput
-						placeholder='Repeat Password*'
+						placeholder='Repeat password*'
 						type='password'
 						{...register('repeatPassword')}
 					/>
