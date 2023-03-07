@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 import { toast } from 'react-toastify'
+import { useGoogleLogin } from '@react-oauth/google'
 import { Container } from '../../../common/components/container/container'
 import { AuthInput } from '../components/auth-input'
 import { Button } from '../../../common/components/button/button'
@@ -25,7 +26,7 @@ export const SignInPage: React.FC = () => {
 	const [showPassword, setShowPassword] = React.useState(false)
 	const handleShowPassword = () => setShowPassword(!showPassword)
 
-	const { signIn } = useAuth()
+	const { signIn, signInGoogle } = useAuth()
 
 	const { register, handleSubmit, formState } = useForm<SignInFormValues>({
 		defaultValues: {
@@ -46,12 +47,19 @@ export const SignInPage: React.FC = () => {
 		}
 	}
 
-	console.log('=== formState sign-in.page.tsx [54] ===', formState)
+	const authWithGoogle = useGoogleLogin({
+		flow: 'auth-code',
+		onSuccess: codeResponse => {
+			signInGoogle(codeResponse.code)
+			navigate('/')
+		},
+		onError: errorResponse => console.log(errorResponse),
+	})
 
 	return (
 		<Container>
 			<div className='max-w-md mx-auto mt-8 px-4 py-6 rounded bg-white shadow-articlePage'>
-				<h5 className='text-2xl text-center mb-2'>Sign Ip</h5>
+				<h5 className='text-2xl text-center mb-2'>Sign In</h5>
 				<p className='font-source text-center mb-4'>
 					<Link
 						to='/sign-up'
@@ -88,8 +96,10 @@ export const SignInPage: React.FC = () => {
 					>
 						SIGN IN
 					</Button>
-					<Button buttonStyle='AUTH'>SIGN IN WITH GOOGLE</Button>
 				</form>
+				<Button onClick={authWithGoogle} buttonStyle='GOOGLE'>
+					SIGN IN WITH GOOGLE
+				</Button>
 			</div>
 		</Container>
 	)

@@ -11,7 +11,20 @@ export const Header: React.FC = () => {
 			'text-theme-blue/80': isActive,
 		})
 
-	const { isLoggedIn, logOut } = useAuth()
+	const { user, isLoggedIn, accessToken, checkAuth, checkAuthGoogle, logout } =
+		useAuth()
+
+	React.useEffect(() => {
+		if (accessToken && accessToken.length < 500) {
+			checkAuth()
+		}
+		if (accessToken && accessToken.length > 500) {
+			if (user!.exp && user!.exp * 1000 < new Date().getTime()) {
+				logout()
+			}
+			checkAuthGoogle()
+		}
+	}, [])
 
 	return (
 		<header>
@@ -31,9 +44,9 @@ export const Header: React.FC = () => {
 								<>
 									<li className='ml-4'>
 										<NavLink
-											to='/sign-in'
+											to='/'
 											className='py-headerNavItem hover:text-theme-blue/60'
-											onClick={logOut}
+											onClick={logout}
 										>
 											Log out
 										</NavLink>

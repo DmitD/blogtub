@@ -1,11 +1,13 @@
 export interface SignInInDTO {
+	accessToken: string
+	refreshToken: string
 	user: User
 }
 
 interface User {
+	id: string
+	name: string
 	email: string
-	token: string
-	username: string
-	bio: string
-	image: string
+	isActivated: boolean
+	img?: string
 }

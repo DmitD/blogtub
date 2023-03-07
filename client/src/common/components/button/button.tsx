@@ -4,11 +4,13 @@ import clsx from 'clsx'
 enum ButtonStyle {
 	FOLLOW = 'FOLLOW',
 	AUTH = 'AUTH',
+	GOOGLE = 'GOOGLE',
 }
 
 interface ButtonProps {
 	type?: ComponentProps<'button'>['type']
 	disabled?: ComponentProps<'button'>['disabled']
+	onClick?: ComponentProps<'button'>['onClick']
 	buttonStyle?: keyof typeof ButtonStyle
 }
 
@@ -19,7 +21,8 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = ({
 }) => {
 	const buttonClasses = clsx(
 		'text-white text-center select-none whitespace-nowrap pb-1.5 pt-2.5 px-5 rounded-lg bg-theme-green border border-theme-green hover:bg-theme-darkGreen hover:border-theme-darkGreen active:bg-theme-green/80 active:border-theme-green/80',
-		{ 'col-span-2': buttonStyle === ButtonStyle.AUTH }
+		{ 'col-span-2': buttonStyle === ButtonStyle.AUTH },
+		{ 'w-full mt-4': buttonStyle === ButtonStyle.GOOGLE }
 	)
 	return (
 		<button className={buttonClasses} {...buttonProps}>
