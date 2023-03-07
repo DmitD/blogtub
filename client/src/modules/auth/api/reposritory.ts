@@ -1,5 +1,6 @@
-import { createApi } from '@reduxjs/toolkit/query/react'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { blogtubBaseQuery } from '../../../core/blogtub-base-query'
+import { SignInGoogleInDTO } from './dto/sign-in-google.in'
 import { SignInInDTO } from './dto/sign-in.in'
 import { SignUpInDTO } from './dto/sign-up.in'
 
@@ -8,7 +9,7 @@ interface SignUpParams {
 	lastName: string
 	email: string
 	password: string
-	repeatPassword: string
+	confirmPassword: string
 }
 
 interface SignInParams {
@@ -18,23 +19,58 @@ interface SignInParams {
 
 export const authApi = createApi({
 	reducerPath: 'authApi',
-	baseQuery: blogtubBaseQuery,
+	baseQuery: fetchBaseQuery({
+		baseUrl: 'http://localhost:5000/api',
+		credentials: 'include',
+	}),
 	endpoints: builder => ({
 		signUp: builder.query<SignUpInDTO, SignUpParams>({
 			query: args => ({
-				url: '/users',
+				url: '/user/signup',
 				method: 'post',
-				data: { user: args },
+				body: args,
 			}),
 		}),
 		signIn: builder.query<SignInInDTO, SignInParams>({
 			query: args => ({
-				url: '/users/login',
+				url: '/user/login',
 				method: 'post',
-				data: { user: args },
+				body: args,
+			}),
+		}),
+		checkAuth: builder.query<SignInInDTO, any>({
+			query: () => ({
+				url: '/user/refresh-token',
+				method: 'get',
+			}),
+		}),
+		signInGoogle: builder.query<SignInGoogleInDTO, string>({
+			query: code => ({
+				url: '/user/login-google',
+				method: 'post',
+				body: { code },
+			}),
+		}),
+		checkAuthGoogle: builder.query<SignInGoogleInDTO, any>({
+			query: () => ({
+				url: '/user/refresh-google-token',
+				method: 'get',
+			}),
+		}),
+		logout: builder.query<any, any>({
+			query: () => ({
+				url: '/user/logout',
+				method: 'post',
 			}),
 		}),
 	}),
 })
 
-export const { useLazySignUpQuery, useLazySignInQuery } = authApi
+export const {
+	useLazySignUpQuery,
+	useLazySignInQuery,
+	useLazyCheckAuthQuery,
+	useLazySignInGoogleQuery,
+	useLazyCheckAuthGoogleQuery,
+	useLazyLogoutQuery,
+} = authApi
