@@ -1,8 +1,10 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import clsx from 'clsx'
+import { IoCreateOutline, IoSettingsOutline } from 'react-icons/io5'
 import { Container } from '../container/container'
 import { useAuth } from '../../../modules/auth/hooks/use-auth'
+import defaultAvatar from '../../../assets/img/user-avatar.svg'
 
 export const Header: React.FC = () => {
 	const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
@@ -19,8 +21,9 @@ export const Header: React.FC = () => {
 			checkAuth()
 		}
 		if (accessToken && accessToken.length > 500) {
-			if (user!.exp && user!.exp * 1000 < new Date().getTime()) {
+			if (user!.exp && user!.exp < new Date().getTime()) {
 				logout()
+				return
 			}
 			checkAuthGoogle()
 		}
@@ -36,16 +39,41 @@ export const Header: React.FC = () => {
 						</Link>
 						<ul className='flex font-source list-none pl-0 mb-0'>
 							<li>
-								<NavLink to='/' className={navLinkClasses}>
+								<NavLink to='/' className={navLinkClasses} end>
 									Home
 								</NavLink>
 							</li>
 							{isLoggedIn ? (
 								<>
 									<li className='ml-4'>
+										<NavLink to='/editor' className={navLinkClasses}>
+											<IoCreateOutline className='inline-block text-lg align-middle pb-1' />
+											New article
+										</NavLink>
+									</li>
+									<li className='ml-4'>
+										<NavLink to='/settings' className={navLinkClasses}>
+											<IoSettingsOutline className='inline-block text-lg align-middle pb-1' />
+											Settings
+										</NavLink>
+									</li>
+									<li className='ml-4'>
+										<NavLink to={`/${user?.name}`} className={navLinkClasses}>
+											<img
+												src={user?.img || defaultAvatar}
+												alt={`${user?.name} avatar`}
+												className='w-6 h-6 mr-1 rounded-full inline-block'
+												onError={(e: React.ChangeEvent<HTMLImageElement>) => {
+													e.target.src = defaultAvatar
+												}}
+											/>
+											{user?.name}
+										</NavLink>
+									</li>
+									<li className='ml-4'>
 										<NavLink
 											to='/'
-											className='py-headerNavItem hover:text-theme-blue/60'
+											className='py-headerNavItem text-theme-blue/30 hover:text-theme-blue/60'
 											onClick={logout}
 										>
 											Log out

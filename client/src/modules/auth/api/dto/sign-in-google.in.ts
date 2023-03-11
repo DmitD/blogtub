@@ -4,7 +4,7 @@ export interface SignInGoogleInDTO {
 	scope: string
 	token_type: string
 	id_token: string
-	expiry_date: string
+	expiry_date: number
 }
 
 export interface UserGoogle {

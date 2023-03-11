@@ -30,7 +30,23 @@ export const useAuth = () => {
 				id: user.sub,
 				isActivated: user.email_verified,
 				img: user.picture,
-				exp: user.exp,
+				exp: data.expiry_date,
+			},
+		}
+		return authUser
+	}
+
+	const dataGoogleChecked = (data: SignInGoogleInDTO) => {
+		const authUser = {
+			accessToken: data.id_token,
+			refreshToken: data.refresh_token,
+			user: {
+				name: user!.name,
+				email: user!.email,
+				id: user!.id,
+				isActivated: user!.isActivated,
+				img: user!.img,
+				exp: data.expiry_date,
 			},
 		}
 		return authUser
@@ -103,7 +119,7 @@ export const useAuth = () => {
 			throw new Error('No data in query')
 		}
 
-		dispatch(setUser(dataGoogle(data)))
+		dispatch(setUser(dataGoogleChecked(data)))
 	}
 
 	// LOGOUT
