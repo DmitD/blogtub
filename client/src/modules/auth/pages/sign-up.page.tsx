@@ -2,13 +2,14 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
+import * as Yup from 'yup'
 import { toast } from 'react-toastify'
 import { useGoogleLogin } from '@react-oauth/google'
 import { Container } from '../../../common/components/container/container'
-import { AuthInput } from '../components/auth-input'
+import { Input } from '../../../common/components/input/input'
 import { Button } from '../../../common/components/button/button'
 import { useAuth } from '../hooks/use-auth'
+import { ErrorsList } from '../../../common/components/errors-list/errors-list'
 
 interface SignUpFormValues {
 	firstName: string
@@ -18,25 +19,21 @@ interface SignUpFormValues {
 	confirmPassword: string
 }
 
-const validationSchema = yup.object({
-	firstName: yup
-		.string()
+const validationSchema = Yup.object({
+	firstName: Yup.string()
 		.required('first name is required')
 		.min(2, 'must be at least 2 characters long')
 		.max(120),
-	lastName: yup.string().default(''),
-	email: yup
-		.string()
+	lastName: Yup.string().default(''),
+	email: Yup.string()
 		.required('email is required')
 		.email('email is must be a valid email address'),
-	password: yup
-		.string()
+	password: Yup.string()
 		.required()
 		.min(6, 'must be at least 6 characters long'),
-	confirmPassword: yup
-		.string()
+	confirmPassword: Yup.string()
 		.required('please retype your password')
-		.oneOf([yup.ref('password')], 'your passwords do not match'),
+		.oneOf([Yup.ref('password')], 'your passwords do not match'),
 })
 
 export const SignUpPage: React.FC = () => {
@@ -93,39 +90,38 @@ export const SignUpPage: React.FC = () => {
 					onSubmit={handleSubmit(onSubmit)}
 					noValidate
 				>
-					<AuthInput
+					<Input
 						placeholder='First name*'
 						type='text'
-						authInputStyle='HALF'
+						inputStyle='HALF'
 						{...register('firstName')} //register for working with ref (uncontrolled input)
 					/>
-					<AuthInput
+					<Input
 						placeholder='Last name'
 						type='text'
-						authInputStyle='HALF'
+						inputStyle='HALF'
 						{...register('lastName')}
 					/>
-					<AuthInput placeholder='Email*' type='email' {...register('email')} />
-					<AuthInput
+					<Input
+						placeholder='Email*'
+						type='email'
+						inputStyle='WHOLE'
+						{...register('email')}
+					/>
+					<Input
 						placeholder='Password*'
 						type={showPassword ? 'text' : 'password'}
+						inputStyle='WHOLE'
 						handleShowPassword={handleShowPassword}
 						{...register('password')}
 					/>
-					<AuthInput
+					<Input
 						placeholder='Repeat password*'
 						type='password'
+						inputStyle='WHOLE'
 						{...register('confirmPassword')}
 					/>
-					<ul className='col-span-2 list-disc pl-5'>
-						{(
-							Object.keys(formState.errors) as (keyof typeof formState.errors)[]
-						).map(field => (
-							<li key={`error-${field}`} className='text-theme-red'>
-								{formState.errors[field]!.message}
-							</li>
-						))}
-					</ul>
+					<ErrorsList errors={formState.errors} errorStyle='AUTH' />
 					<Button
 						type='submit'
 						disabled={formState.isSubmitting}

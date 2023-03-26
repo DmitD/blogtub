@@ -1,4 +1,5 @@
 import React from 'react'
+import MDEditor from '@uiw/react-md-editor'
 import { useParams } from 'react-router-dom'
 import { Container } from '../../../common/components/container/container'
 import { ProfileInfo } from '../../profile/components/profile-info/profile-info'
@@ -12,9 +13,9 @@ export const ArticlePage: React.FC = () => {
 
 	const { data, isLoading } = useGetArticleQuery({ slug: slug! })
 
-	const convertNewLines = (body: string) => {
-		return body.split('\\n').join('<br />')
-	}
+	// const convertNewLines = (body: string) => {
+	// 	return body.split('\\n').join('<br />')
+	// }
 
 	if (isLoading) {
 		return null
@@ -37,14 +38,20 @@ export const ArticlePage: React.FC = () => {
 							title={data.article.title}
 							createdAt={data.article.createdAt}
 							favoritesCount={data.article.favoritesCount}
+							favorited={data.article.favorited}
+							slug={slug!}
 							body={data.article.body}
 						/>
-						<p
+						{/* <p
 							className='text-17px font-source text-article-gray align-baseline leading-pg mt-8 mb-14'
 							dangerouslySetInnerHTML={{
 								__html: convertNewLines(data.article.body),
 							}}
-						></p>
+						></p> */}
+						<MDEditor.Markdown
+							source={data.article.body}
+							className='bg-white text-17px font-source text-article-gray align-baseline leading-pg mt-8 mb-14'
+						/>
 						<TagList list={data.article.tagList} />
 					</div>
 					<CommentsList />

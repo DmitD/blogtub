@@ -6,9 +6,10 @@ import * as Yup from 'yup'
 import { toast } from 'react-toastify'
 import { useGoogleLogin } from '@react-oauth/google'
 import { Container } from '../../../common/components/container/container'
-import { AuthInput } from '../components/auth-input'
+import { Input } from '../../../common/components/input/input'
 import { Button } from '../../../common/components/button/button'
 import { useAuth } from '../hooks/use-auth'
+import { ErrorsList } from '../../../common/components/errors-list/errors-list'
 
 interface SignInFormValues {
 	email: string
@@ -73,22 +74,20 @@ export const SignInPage: React.FC = () => {
 					onSubmit={handleSubmit(onSubmit)}
 					noValidate
 				>
-					<AuthInput placeholder='Email*' type='email' {...register('email')} />
-					<AuthInput
+					<Input
+						placeholder='Email*'
+						type='email'
+						inputStyle='WHOLE'
+						{...register('email')}
+					/>
+					<Input
 						placeholder='Password*'
 						type={showPassword ? 'text' : 'password'}
+						inputStyle='WHOLE'
 						handleShowPassword={handleShowPassword}
 						{...register('password')}
 					/>
-					<ul className='col-span-2 list-disc pl-5'>
-						{(
-							Object.keys(formState.errors) as (keyof typeof formState.errors)[]
-						).map(field => (
-							<li key={`error-${field}`} className='text-theme-red'>
-								{formState.errors[field]!.message}
-							</li>
-						))}
-					</ul>
+					<ErrorsList errors={formState.errors} errorStyle='AUTH' />
 					<Button
 						type='submit'
 						disabled={formState.isSubmitting}

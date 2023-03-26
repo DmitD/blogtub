@@ -2,23 +2,29 @@ import React, { ComponentProps } from 'react'
 import clsx from 'clsx'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 
-enum AuthInputStyle {
+enum InputStyle {
 	HALF = 'HALF',
 	WHOLE = 'WHOLE',
 }
 
-interface AuthInputProps {
+enum InputSize {
+	BASE = 'BASE',
+	SM = 'SM',
+}
+
+interface InputProps {
 	name: ComponentProps<'input'>['name']
 	placeholder: ComponentProps<'input'>['placeholder']
 	type?: ComponentProps<'input'>['type']
 	onChange: ComponentProps<'input'>['onChange']
 	onBlur: ComponentProps<'input'>['onBlur']
 	half?: boolean
-	authInputStyle?: keyof typeof AuthInputStyle
+	inputStyle?: keyof typeof InputStyle
+	inputSize?: keyof typeof InputSize
 	handleShowPassword?: () => void
 }
 
-export const AuthInput = React.forwardRef<HTMLInputElement, AuthInputProps>(
+export const Input = React.forwardRef<HTMLInputElement, InputProps>(
 	(
 		{
 			name,
@@ -26,17 +32,23 @@ export const AuthInput = React.forwardRef<HTMLInputElement, AuthInputProps>(
 			type,
 			half,
 			handleShowPassword,
-			authInputStyle = AuthInputStyle.WHOLE,
+			inputStyle,
+			inputSize = InputSize.BASE,
 			...inputProps
 		},
 		ref
 	) => {
-		const inputClasses = clsx('col-span-2 relative', {
-			'sm:col-span-1': authInputStyle === AuthInputStyle.HALF,
+		const styleClasses = clsx({
+			'col-span-2 relative': inputStyle === InputStyle.WHOLE,
+			'col-span-2 relative sm:col-span-1': inputStyle === InputStyle.HALF,
+		})
+		const inputClasses = clsx('border border-theme-blue/10 rounded w-full', {
+			'px-3.5 py-4': inputSize === InputSize.BASE,
+			'px-1 py-2 text-sm': inputSize === InputSize.SM,
 		})
 
 		return (
-			<div className={inputClasses}>
+			<div className={styleClasses}>
 				<label htmlFor={name} />
 				<input
 					ref={ref}
@@ -45,7 +57,7 @@ export const AuthInput = React.forwardRef<HTMLInputElement, AuthInputProps>(
 					placeholder={placeholder}
 					type={type}
 					{...inputProps}
-					className='border border-theme-blue/10 rounded px-3.5 py-4 w-full'
+					className={inputClasses}
 				/>
 				{name === 'password' ? (
 					<button

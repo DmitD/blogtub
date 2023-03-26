@@ -1,5 +1,5 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { blogtubBaseQuery } from '../../../core/blogtub-base-query'
+import { createApi } from '@reduxjs/toolkit/query/react'
+import { blogtubBaseQuery } from '../../../core/api/blogtub-base-query'
 import { SignInGoogleInDTO } from './dto/sign-in-google.in'
 import { SignInInDTO } from './dto/sign-in.in'
 import { SignUpInDTO } from './dto/sign-up.in'
@@ -19,10 +19,7 @@ interface SignInParams {
 
 export const authApi = createApi({
 	reducerPath: 'authApi',
-	baseQuery: fetchBaseQuery({
-		baseUrl: 'http://localhost:5000/api',
-		credentials: 'include',
-	}),
+	baseQuery: blogtubBaseQuery,
 	endpoints: builder => ({
 		signUp: builder.query<SignUpInDTO, SignUpParams>({
 			query: args => ({
@@ -31,6 +28,7 @@ export const authApi = createApi({
 				body: args,
 			}),
 		}),
+
 		signIn: builder.query<SignInInDTO, SignInParams>({
 			query: args => ({
 				url: '/user/login',
@@ -38,12 +36,14 @@ export const authApi = createApi({
 				body: args,
 			}),
 		}),
+
 		checkAuth: builder.query<SignInInDTO, any>({
 			query: () => ({
 				url: '/user/refresh-token',
 				method: 'get',
 			}),
 		}),
+
 		signInGoogle: builder.query<SignInGoogleInDTO, string>({
 			query: code => ({
 				url: '/user/login-google',
@@ -51,12 +51,14 @@ export const authApi = createApi({
 				body: { code },
 			}),
 		}),
+
 		checkAuthGoogle: builder.query<SignInGoogleInDTO, any>({
 			query: () => ({
 				url: '/user/refresh-google-token',
 				method: 'get',
 			}),
 		}),
+
 		logout: builder.query<any, any>({
 			query: () => ({
 				url: '/user/logout',

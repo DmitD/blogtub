@@ -7,6 +7,27 @@ const userSchema = mongoose.Schema({
 	password: { type: String, required: true },
 	isActivated: { type: Boolean, default: false },
 	activationLink: { type: String },
+	articles: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Article',
+		},
+	],
+	favorites: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Article',
+		},
+	],
+	followedBy: {
+		type: [String],
+		default: [],
+	},
+	following: {
+		type: [String],
+		default: [],
+	},
+	comments: [String],
 })
 
 export default mongoose.model('User', userSchema)

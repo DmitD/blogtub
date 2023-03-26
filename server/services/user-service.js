@@ -80,6 +80,14 @@ class UserService {
 		await TokenService.saveToken(userDto.id, tokens.refreshToken)
 		return { ...tokens, user: userDto }
 	}
+
+	async addArticleToUser(userId, articleId) {
+		await User.findByIdAndUpdate(
+			userId,
+			{ $push: { articles: articleId } },
+			{ new: true, useFindAndModify: false }
+		)
+	}
 }
 
 export default new UserService()

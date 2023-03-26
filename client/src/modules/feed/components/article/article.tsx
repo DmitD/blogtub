@@ -15,6 +15,7 @@ export const Article: React.FC<ArticleProps> = ({
 	title,
 	description,
 	favoritesCount,
+	favorited,
 	tagList,
 	slug,
 	body,
@@ -44,7 +45,11 @@ export const Article: React.FC<ArticleProps> = ({
 								)}
 							</span>
 							<ReadingTime article={body} />
-							<FavoriteButton count={favoritesCount} />
+							<FavoriteButton
+								count={favoritesCount}
+								slug={slug}
+								isFavorited={favorited}
+							/>
 						</div>
 					</div>
 				</div>

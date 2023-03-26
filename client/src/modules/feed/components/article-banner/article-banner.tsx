@@ -7,6 +7,8 @@ interface ArticleBannerProps {
 	title: string
 	createdAt: string
 	favoritesCount: number
+	favorited: boolean
+	slug: string
 	body: string
 }
 
@@ -14,6 +16,8 @@ export const ArticleBanner: React.FC<ArticleBannerProps> = ({
 	title,
 	createdAt,
 	favoritesCount,
+	favorited,
+	slug,
 	body,
 }) => {
 	return (
@@ -26,7 +30,11 @@ export const ArticleBanner: React.FC<ArticleBannerProps> = ({
 					{DateTime.fromISO(createdAt).toLocaleString(DateTime.DATE_SHORT)}
 				</span>
 				<ReadingTime article={body} />
-				<FavoriteButton count={favoritesCount} />
+				<FavoriteButton
+					count={favoritesCount}
+					slug={slug}
+					isFavorited={favorited}
+				/>
 			</div>
 		</div>
 	)

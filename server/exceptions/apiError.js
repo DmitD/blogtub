@@ -8,6 +8,10 @@ export default class ApiError extends Error {
 		this.errors = errors
 	}
 
+	static UnprocessableEntity(message, errors = []) {
+		return new ApiError(422, message, errors)
+	}
+
 	static NotFound() {
 		return new ApiError(404, 'User not found')
 	}
