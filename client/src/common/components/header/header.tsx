@@ -58,16 +58,19 @@ export const Header: React.FC = () => {
 										</NavLink>
 									</li>
 									<li className='ml-4'>
-										<NavLink to={`/${user?.name}`} className={navLinkClasses}>
+										<NavLink
+											to={`/${user?.username}`}
+											className={navLinkClasses}
+										>
 											<img
-												src={user?.img || defaultAvatar}
-												alt={`${user?.name} avatar`}
+												src={user?.image || defaultAvatar}
+												alt={`${user?.username} avatar`}
 												className='w-6 h-6 mr-1 rounded-full inline-block'
 												onError={(e: React.ChangeEvent<HTMLImageElement>) => {
 													e.target.src = defaultAvatar
 												}}
 											/>
-											{user?.name}
+											{user?.username}
 										</NavLink>
 									</li>
 									<li className='ml-4'>

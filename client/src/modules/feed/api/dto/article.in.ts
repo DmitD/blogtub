@@ -5,19 +5,19 @@ export interface ArticleDTO {
 interface Article {
 	slug: string
 	title: string
-	description: string
 	body: string
 	tagList: string[]
 	createdAt: string
-	updatedAt: string
 	favorited: boolean
 	favoritesCount: number
 	author: Author
 }
 
 interface Author {
+	id: string
 	username: string
-	bio: string
-	image: string
+	email: string
+	image?: string
+	isActivated: boolean
 	following: boolean
 }

@@ -34,7 +34,7 @@ export const ProfileInfo: React.FC<ProfileInfoProps> = ({ profile }) => {
 				className='w-20 h-20 rounded-full shadow-author mr-6'
 			/>
 			<h4 className='text-2xl font-bold my-4'>{profile.username}</h4>
-			{user?.name !== profile.username ? (
+			{user?.username !== profile.username ? (
 				<Button onClick={toggleFollow}>
 					{following ? 'Following' : 'Follow'}
 				</Button>

@@ -3,8 +3,10 @@ export interface GetProfileDTO {
 }
 
 export interface Profile {
+	id: string
 	username: string
-	bio: string
-	image: string
-	following: boolean
+	email: string
+	image?: string
+	isActivated: boolean
+	following?: boolean
 }

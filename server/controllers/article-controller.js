@@ -21,7 +21,7 @@ export const getArticle = async (req, res, next) => {
 	try {
 		const { slug } = req.params
 		const article = await ArticleService.getArticle(slug)
-		res.json(article)
+		res.json({ article })
 	} catch (error) {
 		res.status(409).json({ message: error.message })
 	}

@@ -19,7 +19,7 @@ class UserService {
 		const result = await User.create({
 			email,
 			password: hashedPassword,
-			name: `${firstName} ${lastName}`,
+			username: `${firstName} ${lastName}`,
 			activationLink,
 		})
 		await MailService.sendActivationMail(

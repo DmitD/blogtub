@@ -115,6 +115,7 @@ export const baseQueryWithReauth: BaseQueryFn<
 
 	if (result.error && result.error.status === 401) {
 		const token = (api.getState() as RootState).auth.token
+		console.log('=== token base-query-with-reauth.ts [118] ===', token)
 
 		if (token && token.length < 500) {
 			// try to get a new token

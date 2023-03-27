@@ -1,13 +1,17 @@
 export default class UserDto {
 	id
-	name
+	username
 	email
 	isActivated
+	following
 
-	constructor(model) {
+	constructor(model, userId) {
 		this.id = model._id
-		this.name = model.name
+		this.username = model.username
 		this.email = model.email
 		this.isActivated = model.isActivated
+		this.following = userId
+			? model.followedBy.some(followingUser => followingUser === userId)
+			: false
 	}
 }

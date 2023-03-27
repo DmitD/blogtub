@@ -3,6 +3,7 @@ import Article from '../models/article-model.js'
 import User from '../models/user-model.js'
 import UserService from '../services/user-service.js'
 import TagService from './tag-service.js'
+import ArticleDto from '../dtos/article-dto.js'
 import UserDto from '../dtos/user-dto.js'
 import ApiError from '../exceptions/apiError.js'
 
@@ -33,24 +34,21 @@ class ArticleService {
 			authorId: userId,
 		})
 
-		const tagsId = await TagService.createTag(tagList)
+		const tags = await TagService.createTag(tagList)
 		const articleWithTags = await TagService.addTagToArticle(
 			newArticle._id,
-			tagsId
+			tags
 		)
-		await TagService.addArticleToTag(tagsId, newArticle._id)
-		// const articleWithTags = await Article.findById(newArticle._id).populate(
-		// 	'tags'
-		// )
+		await TagService.addArticleToTag(tags, newArticle._id)
+
+		const articleDto = new ArticleDto(articleWithTags)
 
 		await UserService.addArticleToUser(userId, newArticle._id)
 		const existingUser = await User.findById(userId)
 		const userDto = new UserDto(existingUser)
 
 		const fullArticle = {
-			data: articleWithTags,
-			favorited: false,
-			favoritesCount: 0,
+			...articleDto,
 			author: userDto,
 		}
 
@@ -59,16 +57,18 @@ class ArticleService {
 
 	async getArticle(slug) {
 		const article = await Article.findOne({ slug: slug })
+
 		if (!article) {
 			throw ApiError.UnprocessableEntity('Not found')
 		}
+
+		const articleDto = new ArticleDto(article)
+
 		const existingUser = await User.findById(article.authorId)
 		const userDto = new UserDto(existingUser)
 
 		const fullArticle = {
-			data: article,
-			favorited: false,
-			favoritesCount: 0,
+			...articleDto,
 			author: userDto,
 		}
 

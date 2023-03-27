@@ -3,7 +3,7 @@ import Article from '../models/article-model.js'
 
 class TagService {
 	async createTag(tagList) {
-		const tagsId = await Promise.all(
+		const tags = await Promise.all(
 			tagList.map(async tag => {
 				const existingTag = await Tag.findOne({ name: tag })
 				if (existingTag) {
@@ -14,22 +14,22 @@ class TagService {
 				}
 			})
 		)
-		return tagsId
+		return tags
 	}
 
-	async addTagToArticle(articleId, tagListId) {
+	async addTagToArticle(articleId, tagList) {
 		return await Article.findByIdAndUpdate(
 			articleId,
-			{ tags: tagListId },
+			{ tags: tagList },
 			{ new: true, useFindAndModify: false }
 		)
 	}
 
-	async addArticleToTag(tagsId, articleId) {
+	async addArticleToTag(tags, articleId) {
 		return await Promise.all(
-			tagsId.map(async tagId => {
+			tags.map(async tag => {
 				await Tag.findByIdAndUpdate(
-					tagId._id,
+					tag._id,
 					{ $push: { articles: articleId } },
 					{ new: true, useFindAndModify: false }
 				)

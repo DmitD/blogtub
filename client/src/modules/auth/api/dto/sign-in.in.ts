@@ -6,8 +6,10 @@ export interface SignInInDTO {
 
 interface User {
 	id: string
-	name: string
+	username: string
 	email: string
+	image?: string
 	isActivated: boolean
-	img?: string
+	following?: boolean
+	exp?: number
 }

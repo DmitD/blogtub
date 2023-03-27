@@ -7,13 +7,15 @@ export default class ArticleDto {
 	favorited
 	favoritesCount
 
-	constructor(model) {
+	constructor(model, userId) {
 		this.slug = model.slug
 		this.title = model.title
 		this.body = model.body
 		this.tagList = model.tags.map(tag => tag.name)
 		this.createdAt = model.createdAt
-		this.favorited = model.favoritedBy.some(id => id === model.authorId)
+		this.favorited = userId
+			? model.favoritedBy.some(id => id === userId)
+			: false
 		this.favoritesCount = model.favoritedBy.length
 	}
 }

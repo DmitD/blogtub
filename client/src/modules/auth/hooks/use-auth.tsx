@@ -25,7 +25,7 @@ export const useAuth = () => {
 			accessToken: data.id_token,
 			refreshToken: data.refresh_token,
 			user: {
-				name: user.name,
+				username: user.name,
 				email: user.email,
 				id: user.sub,
 				isActivated: user.email_verified,
@@ -41,11 +41,11 @@ export const useAuth = () => {
 			accessToken: data.id_token,
 			refreshToken: data.refresh_token,
 			user: {
-				name: user!.name,
+				username: user!.username,
 				email: user!.email,
 				id: user!.id,
 				isActivated: user!.isActivated,
-				img: user!.img,
+				img: user!.image,
 				exp: data.expiry_date,
 			},
 		}

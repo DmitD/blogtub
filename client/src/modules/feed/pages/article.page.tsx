@@ -33,7 +33,7 @@ export const ArticlePage: React.FC = () => {
 		<Container>
 			<div className='flex flex-row justify-between mt-8'>
 				<div className='max-w-[728px] min-w-[728px]'>
-					<div className='bg-white shadow-articlePage p-12 mx-auto mt-0 mb-articleBottom'>
+					<div className='bg-white shadow-articlePage p-12 mx-auto mt-0 mb-articleBottom relative'>
 						<ArticleBanner
 							title={data.article.title}
 							createdAt={data.article.createdAt}
@@ -41,6 +41,7 @@ export const ArticlePage: React.FC = () => {
 							favorited={data.article.favorited}
 							slug={slug!}
 							body={data.article.body}
+							author={data.article.author}
 						/>
 						{/* <p
 							className='text-17px font-source text-article-gray align-baseline leading-pg mt-8 mb-14'

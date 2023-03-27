@@ -50,6 +50,7 @@ export const FavoriteButton: React.FC<FavoriteButtonProps> = ({
 		return (
 			<>
 				<IoIosHeartEmpty className='text-theme-green inline-block mb-0.5 h-5 w-5' />
+				&nbsp;{count}
 			</>
 		)
 	}
@@ -57,7 +58,7 @@ export const FavoriteButton: React.FC<FavoriteButtonProps> = ({
 	return (
 		<button
 			className={clsx(
-				'text-center select-none whitespace-nowrap align-middle',
+				'text-center select-none whitespace-nowrap align-middle mr-4',
 				{ 'hover:text-theme-green active:text-theme-green/80': isLoggedIn }
 			)}
 			disabled={!isLoggedIn}

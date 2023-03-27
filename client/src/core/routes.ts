@@ -31,7 +31,7 @@ export const routes: Record<string, RouteItem> = {
 		Element: ProfilePage,
 	},
 	singleArticle: {
-		path: '/article/:slug',
+		path: '/articles/:slug',
 		Element: ArticlePage,
 	},
 	signIn: {

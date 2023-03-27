@@ -5,10 +5,11 @@ export interface SignUpInDTO {
 }
 
 interface User {
-	name: string
-	email: string
 	id: string
+	username: string
+	email: string
+	image?: string
 	isActivated: boolean
-	img?: string
+	following?: boolean
 	exp?: number
 }

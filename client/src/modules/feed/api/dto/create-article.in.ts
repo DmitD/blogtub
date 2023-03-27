@@ -8,15 +8,16 @@ interface Article {
 	body: string
 	tagList: string[]
 	createdAt: string
-	updatedAt: string
 	favorited: boolean
 	favoritesCount: number
 	author: Author
 }
 
 interface Author {
+	id: string
 	username: string
-	bio: string
-	image: string
-	following: boolean
+	email: string
+	image?: string
+	isActivated: boolean
+	following?: boolean
 }

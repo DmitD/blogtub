@@ -2,6 +2,10 @@ import React from 'react'
 import { DateTime } from 'luxon'
 import { FavoriteButton } from '../favorite-button/favorite-button'
 import { ReadingTime } from '../reading-time/reading-time'
+import { useAuth } from '../../../auth/hooks/use-auth'
+import { Profile } from '../../../profile/api/dto/profile.in'
+import { EditButton } from '../edit-button/edit-button'
+import { DeleteButton } from '../delete-button/delete-button'
 
 interface ArticleBannerProps {
 	title: string
@@ -10,6 +14,7 @@ interface ArticleBannerProps {
 	favorited: boolean
 	slug: string
 	body: string
+	author: Profile
 }
 
 export const ArticleBanner: React.FC<ArticleBannerProps> = ({
@@ -19,7 +24,10 @@ export const ArticleBanner: React.FC<ArticleBannerProps> = ({
 	favorited,
 	slug,
 	body,
+	author,
 }) => {
+	const { user } = useAuth()
+
 	return (
 		<div>
 			<h2 className='text-3xl text-center font-bold pb-1 pt-1 mb-1.5'>
@@ -35,6 +43,12 @@ export const ArticleBanner: React.FC<ArticleBannerProps> = ({
 					slug={slug}
 					isFavorited={favorited}
 				/>
+				{user?.username === author.username && (
+					<div className='inline-block absolute top-8 right-8'>
+						<EditButton />
+						<DeleteButton />
+					</div>
+				)}
 			</div>
 		</div>
 	)
