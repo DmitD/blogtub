@@ -6,6 +6,7 @@ import { useAuth } from '../../../auth/hooks/use-auth'
 import { Profile } from '../../../profile/api/dto/profile.in'
 import { EditButton } from '../edit-button/edit-button'
 import { DeleteButton } from '../delete-button/delete-button'
+import { useNavigate } from 'react-router-dom'
 
 interface ArticleBannerProps {
 	title: string
@@ -28,6 +29,11 @@ export const ArticleBanner: React.FC<ArticleBannerProps> = ({
 }) => {
 	const { user } = useAuth()
 
+	const navigate = useNavigate()
+	const navigateToEditArticle = () => {
+		navigate(`/editor/${slug}`)
+	}
+
 	return (
 		<div>
 			<h2 className='text-3xl text-center font-bold pb-1 pt-1 mb-1.5'>
@@ -45,7 +51,7 @@ export const ArticleBanner: React.FC<ArticleBannerProps> = ({
 				/>
 				{user?.username === author.username && (
 					<div className='inline-block absolute top-8 right-8'>
-						<EditButton />
+						<EditButton onClick={navigateToEditArticle} />
 						<DeleteButton />
 					</div>
 				)}

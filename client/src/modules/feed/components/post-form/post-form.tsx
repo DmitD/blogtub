@@ -21,15 +21,17 @@ const validationSchema = Yup.object({
 	body: Yup.string().required(`body can't be blank`),
 	tags: Yup.string()
 		.default('')
+		.required('tags is required')
 		.max(30, 'title must be less than 30 characters'),
 })
 
-export const PostForm: React.FC<PostFormProps> = ({ onSubmit }) => {
+export const PostForm: React.FC<PostFormProps> = ({ onSubmit, data }) => {
 	const {
 		register,
 		control,
 		handleSubmit,
 		formState: { isSubmitting, errors },
+		reset,
 	} = useForm<PostFormValues>({
 		defaultValues: {
 			title: '',
@@ -38,6 +40,18 @@ export const PostForm: React.FC<PostFormProps> = ({ onSubmit }) => {
 		},
 		resolver: yupResolver(validationSchema),
 	})
+
+	React.useEffect(() => {
+		if (!data) {
+			return
+		}
+
+		reset({
+			title: data.article.title,
+			body: data.article.body,
+			tags: data.article.tagList.join(', '),
+		})
+	}, [data])
 
 	return (
 		<form

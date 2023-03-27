@@ -42,8 +42,12 @@ export const routes: Record<string, RouteItem> = {
 		path: '/sign-up',
 		Element: SignUpPage,
 	},
-	editor: {
+	createArticle: {
 		path: '/editor',
+		Element: EditorPage,
+	},
+	editArticle: {
+		path: '/editor/:slug',
 		Element: EditorPage,
 	},
 }
