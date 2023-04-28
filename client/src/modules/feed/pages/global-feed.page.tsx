@@ -48,7 +48,7 @@ export const GlobalFeedPage: React.FC = () => {
 						/>
 					</div>
 					<div className='max-w-[368px] min-w-[368px]'>
-						<RecentPosts posts={data?.articles.slice(0, 4) || []} />
+						{/* <RecentPosts /> */}
 						<TagCloud />
 						<Social />
 					</div>

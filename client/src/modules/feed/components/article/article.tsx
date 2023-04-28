@@ -13,7 +13,6 @@ export const Article: React.FC<ArticleProps> = ({
 	author,
 	createdAt,
 	title,
-	description,
 	favoritesCount,
 	favorited,
 	tagList,
@@ -24,7 +23,7 @@ export const Article: React.FC<ArticleProps> = ({
 		<article>
 			<div className='bg-white shadow-articlePage p-12 mx-auto mt-0 mb-articleBottom relative'>
 				<div className='flex items-center'>
-					<Link to={`/article/${encodeURIComponent(slug)}`}>
+					<Link to={`/articles/${encodeURIComponent(slug)}`}>
 						<img
 							src='https://themes.estudiopatagon.com/wordpress/maktub/wp-content/uploads/2019/07/mixkit-man-holding-the-brim-of-a-yellow-fedora-that-covers-93-desktop-wallpaper-150x150.jpg'
 							alt='article'
@@ -33,7 +32,7 @@ export const Article: React.FC<ArticleProps> = ({
 					</Link>
 					<div className='inline-flex flex-col ml-7'>
 						<Link
-							to={`/article/${encodeURIComponent(slug)}`}
+							to={`/articles/${encodeURIComponent(slug)}`}
 							className='text-38px font-bold pb-1 pt-1 mb-1.5 hover:underline decoration-theme-green'
 						>
 							<h2>{title}</h2>
@@ -54,7 +53,7 @@ export const Article: React.FC<ArticleProps> = ({
 					</div>
 				</div>
 				<div className='text-17px font-source text-article-gray break-words align-baseline leading-pg mt-8 mb-14'>
-					<p>{description}…</p>
+					<p>{body}…</p>
 				</div>
 				<div className='flex justify-between'>
 					<TagList list={tagList} />

@@ -4,6 +4,7 @@ import User from '../models/user-model.js'
 import UserDto from '../dtos/user-dto.js'
 import MailService from './mail-service.js'
 import TokenService from './token-service.js'
+import ApiError from '../exceptions/api-error.js'
 
 class UserService {
 	async signup(email, password, confirmPassword, firstName, lastName) {
@@ -17,9 +18,9 @@ class UserService {
 		const hashedPassword = await bcrypt.hash(password, 12)
 		const activationLink = uuidv4()
 		const result = await User.create({
+			username: `${firstName} ${lastName}`,
 			email,
 			password: hashedPassword,
-			username: `${firstName} ${lastName}`,
 			activationLink,
 		})
 		await MailService.sendActivationMail(
@@ -27,7 +28,7 @@ class UserService {
 			`${process.env.API_URL}/api/user/activate/${activationLink}`
 		)
 		const userDto = new UserDto(result)
-		const tokens = TokenService.generateTokens({ ...userDto })
+		const tokens = TokenService.generateTokens({ id: userDto.id })
 		await TokenService.saveToken(userDto.id, tokens.refreshToken)
 		return { ...tokens, user: userDto }
 	}
@@ -54,7 +55,7 @@ class UserService {
 			throw ApiError.BadRequest('Invalid credentials')
 		}
 		const userDto = new UserDto(existingUser)
-		const tokens = TokenService.generateTokens({ ...userDto })
+		const tokens = TokenService.generateTokens({ id: userDto.id })
 		await TokenService.saveToken(userDto.id, tokens.refreshToken)
 		return { ...tokens, user: userDto }
 	}
@@ -75,18 +76,25 @@ class UserService {
 		}
 		const existingUser = await User.findById(userData.id)
 		const userDto = new UserDto(existingUser)
-		const tokens = TokenService.generateTokens({ ...userDto })
+		const tokens = TokenService.generateTokens({ id: userDto.id })
 
 		await TokenService.saveToken(userDto.id, tokens.refreshToken)
 		return { ...tokens, user: userDto }
 	}
 
 	async addArticleToUser(userId, articleId) {
-		await User.findByIdAndUpdate(
-			userId,
-			{ $push: { articles: articleId } },
-			{ new: true, useFindAndModify: false }
-		)
+		const existingUserWithArticle = await User.findOne({
+			articles: articleId,
+		})
+		if (existingUserWithArticle) {
+			return
+		} else {
+			await User.findByIdAndUpdate(
+				userId,
+				{ $push: { articles: articleId } },
+				{ new: true, useFindAndModify: false }
+			)
+		}
 	}
 }
 

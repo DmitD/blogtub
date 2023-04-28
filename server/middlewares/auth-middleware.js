@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import TokenService from '../services/token-service.js'
-import ApiError from '../exceptions/apiError.js'
+import ApiError from '../exceptions/api-error.js'
 
 const authMiddleware = (req, res, next) => {
 	try {
@@ -26,6 +26,10 @@ const authMiddleware = (req, res, next) => {
 		if (accessToken && !isCustomAuth) {
 			userData = jwt.decode(accessToken) // google token
 			req.userId = userData.sub
+		}
+
+		if (!userData) {
+			return next(ApiError.UnauthorizedError())
 		}
 
 		if (!userData) {

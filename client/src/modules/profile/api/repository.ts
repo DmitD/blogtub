@@ -1,5 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
-import { blogtubBaseQuery } from '../../../core/blogtub-base-query'
+import { baseQueryWithReauth } from '../../../core/api/base-query-with-reauth'
 import { FollowUserInDTO } from './dto/follow-user.in'
 import { GetProfileDTO } from './dto/profile.in'
 
@@ -9,7 +9,7 @@ interface ProfileParams {
 
 export const profileApi = createApi({
 	reducerPath: 'profileApi',
-	baseQuery: blogtubBaseQuery,
+	baseQuery: baseQueryWithReauth,
 	endpoints: builder => ({
 		getProfile: builder.query<GetProfileDTO, ProfileParams>({
 			query: ({ username }) => ({

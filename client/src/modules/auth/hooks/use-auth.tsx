@@ -29,7 +29,7 @@ export const useAuth = () => {
 				email: user.email,
 				id: user.sub,
 				isActivated: user.email_verified,
-				img: user.picture,
+				image: user.picture,
 				exp: data.expiry_date,
 			},
 		}
@@ -45,7 +45,7 @@ export const useAuth = () => {
 				email: user!.email,
 				id: user!.id,
 				isActivated: user!.isActivated,
-				img: user!.image,
+				image: user!.image,
 				exp: data.expiry_date,
 			},
 		}

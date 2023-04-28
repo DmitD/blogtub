@@ -28,13 +28,40 @@ class TagService {
 	async addArticleToTag(tags, articleId) {
 		return await Promise.all(
 			tags.map(async tag => {
+				const existingTagWithArticle = await Tag.findOne({
+					articles: articleId,
+				})
+				if (existingTagWithArticle) {
+					return
+				} else {
+					await Tag.findByIdAndUpdate(
+						tag._id,
+						{ $push: { articles: articleId } },
+						{ new: true, useFindAndModify: false }
+					)
+				}
+			})
+		)
+	}
+
+	async deleteArticleFromTag(tags, articleId) {
+		await Promise.all(
+			tags.map(async tag => {
+				const existingTagWithArticle = await Tag.findOne({
+					name: tag,
+				})
 				await Tag.findByIdAndUpdate(
-					tag._id,
-					{ $push: { articles: articleId } },
+					existingTagWithArticle._id,
+					{ $pull: { articles: articleId } },
 					{ new: true, useFindAndModify: false }
 				)
 			})
 		)
+	}
+
+	async getTagCloud() {
+		const tagList = await Tag.find().limit(10)
+		return tagList.map(tag => tag.name)
 	}
 }
 

@@ -10,7 +10,7 @@ import {
 	refreshGoogle,
 } from '../controllers/user-controller.js'
 
-const router = express.Router()
+const router = new express.Router()
 
 router.post(
 	'/signup',

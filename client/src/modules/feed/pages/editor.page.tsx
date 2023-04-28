@@ -31,7 +31,7 @@ export const EditorPage: React.FC = () => {
 			} else {
 				data = await triggerCreateArticle(values).unwrap()
 			}
-			navigate(`/article/${data.article.slug}`)
+			navigate(`/articles/${data.article.slug}`)
 		} catch (e) {
 			toast.error('Something went wrong. Please, try again.')
 		}

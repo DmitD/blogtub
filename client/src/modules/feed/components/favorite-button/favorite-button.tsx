@@ -2,9 +2,13 @@ import React from 'react'
 import { IoIosHeartEmpty, IoIosHeart } from 'react-icons/io'
 import { useNavigate } from 'react-router-dom'
 import clsx from 'clsx'
+import { toast } from 'react-toastify'
 import { routes } from '../../../../core/routes'
 import { useAuth } from '../../../auth/hooks/use-auth'
-import { useFavoriteArticleMutation } from '../../api/repository'
+import {
+	useFavoriteArticleMutation,
+	useUnfavoriteArticleMutation,
+} from '../../api/repository'
 
 interface FavoriteButtonProps {
 	count: number
@@ -16,16 +20,27 @@ interface FavoriteButtonProps {
 export const FavoriteButton: React.FC<FavoriteButtonProps> = ({
 	count,
 	slug,
-	isFavorited,
+	isFavorited = false,
 }) => {
 	const { isLoggedIn } = useAuth()
 	const navigate = useNavigate()
-	const [triggerFavoroiteMutation] = useFavoriteArticleMutation()
+	const [triggerFavoriteMutation] = useFavoriteArticleMutation()
+	const [triggerUnfavoriteMutation] = useUnfavoriteArticleMutation()
 
-	const handleFavoriteClick = () => {
-		if (!isLoggedIn) {
-			navigate(routes.signIn.path)
-			return
+	const handleFavoriteClick = async () => {
+		// if (!isLoggedIn) {
+		// 	navigate(routes.signIn.path)
+		// 	return
+		// }
+
+		try {
+			if (isFavorited) {
+				await triggerUnfavoriteMutation({ slug }).unwrap()
+			} else {
+				await triggerFavoriteMutation({ slug }).unwrap()
+			}
+		} catch (e) {
+			toast.error("Something wen't wrong. Please, try again later")
 		}
 	}
 
@@ -57,6 +72,7 @@ export const FavoriteButton: React.FC<FavoriteButtonProps> = ({
 
 	return (
 		<button
+			onClick={handleFavoriteClick}
 			className={clsx(
 				'text-center select-none whitespace-nowrap align-middle mr-4',
 				{ 'hover:text-theme-green active:text-theme-green/80': isLoggedIn }

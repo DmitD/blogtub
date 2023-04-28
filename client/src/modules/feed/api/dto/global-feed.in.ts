@@ -6,19 +6,19 @@ export interface GlobalFeedDTO {
 export interface FeedArticle {
 	slug: string
 	title: string
-	description: string
 	body: string
 	tagList: string[]
 	createdAt: string
-	updatedAt: string
 	favorited: boolean
 	favoritesCount: number
 	author: Author
 }
 
 export interface Author {
+	id: string
 	username: string
-	bio?: any
-	image: string
+	email: string
+	image?: string
+	isActivated: boolean
 	following: boolean
 }

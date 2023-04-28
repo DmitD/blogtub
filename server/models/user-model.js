@@ -1,24 +1,20 @@
 import mongoose from 'mongoose'
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
 	id: { type: String },
 	username: { type: String, unique: true, required: true },
-	email: { type: String, required: true },
-	password: { type: String, required: true },
+	email: { type: String, unique: true, required: true },
+	password: { type: String },
 	isActivated: { type: Boolean, default: false },
 	activationLink: { type: String },
-	articles: [
-		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Article',
-		},
-	],
-	favorites: [
-		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Article',
-		},
-	],
+	image: {
+		type: String,
+		default: 'http://localhost:5000/api/images/user-avatar.svg',
+	},
+	favorites: {
+		type: [String],
+		default: [],
+	},
 	followedBy: {
 		type: [String],
 		default: [],
@@ -27,7 +23,10 @@ const userSchema = mongoose.Schema({
 		type: [String],
 		default: [],
 	},
-	comments: [String],
+	comments: {
+		type: [String],
+		default: [],
+	},
 })
 
 export default mongoose.model('User', userSchema)

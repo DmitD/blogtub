@@ -1,17 +1,33 @@
 import React from 'react'
-import { FeedArticle } from '../../api/dto/global-feed.in'
 import { Post } from '../post/post'
 import { SectionTitle } from '../section-title/section-title'
+import { useGetRecentPostsQuery } from '../../api/repository'
 
-interface RecentPostsProps {
-	posts: FeedArticle[]
-}
+export const RecentPosts: React.FC = () => {
+	const { data, error, isLoading, isFetching } = useGetRecentPostsQuery({
+		limit: 4,
+	})
 
-export const RecentPosts: React.FC<RecentPostsProps> = ({ posts }) => {
+	if (isLoading || isFetching) {
+		return (
+			<section className='mb-rightSectionBottom'>
+				<SectionTitle title='Loading Recent Posts...' />
+			</section>
+		)
+	}
+
+	if (error) {
+		return (
+			<section className='mb-rightSectionBottom'>
+				<SectionTitle title='Error while loading tags' />
+			</section>
+		)
+	}
+
 	return (
 		<section className='mb-rightSectionBottom'>
 			<SectionTitle title='Recent posts' />
-			{posts.map(post => (
+			{data?.articles.map(post => (
 				<Post
 					key={post.slug}
 					title={post.title}

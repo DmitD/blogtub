@@ -20,7 +20,7 @@ export const routes: Record<string, RouteItem> = {
 	personalFeed: {
 		path: '/personal-feed',
 		Element: GlobalFeedPage,
-		private: true,
+		//private: true,
 	},
 	profile: {
 		path: '/:profile',

@@ -9,11 +9,11 @@ export const App: React.FC = () => {
 	const isGlobalFeedPage = useMatch(routes.globalFeed.path)
 	const navigate = useNavigate()
 
-	React.useEffect(() => {
-		if (isGlobalFeedPage && isLoggedIn) {
-			navigate(routes.personalFeed.path)
-		}
-	}, [])
+	// React.useEffect(() => {
+	// 	if (isGlobalFeedPage && isLoggedIn) {
+	// 		navigate(routes.personalFeed.path)
+	// 	}
+	// }, [])
 
 	return (
 		<div className='pb-16'>

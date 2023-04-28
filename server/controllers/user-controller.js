@@ -1,7 +1,9 @@
 import { validationResult } from 'express-validator'
 import { OAuth2Client, UserRefreshClient } from 'google-auth-library'
-import ApiError from '../exceptions/apiError.js'
+import jwt from 'jsonwebtoken'
+import ApiError from '../exceptions/api-error.js'
 import UserService from '../services/user-service.js'
+import User from '../models/user-model.js'
 
 export const signup = async (req, res, next) => {
 	try {
@@ -85,6 +87,18 @@ export const signinGoogle = async (req, res, next) => {
 			'postmessage'
 		)
 		const { tokens } = await oAuth2Client.getToken(code) // exchange code for tokens
+
+		const userData = jwt.decode(tokens.id_token)
+		const existingUser = await User.findOne({ email: userData.email })
+		if (!existingUser) {
+			await User.create({
+				username: userData.name,
+				email: userData.email,
+				isActivated: userData.email_verified,
+				image: userData.picture,
+			})
+		}
+
 		res.cookie('refreshToken', tokens.refresh_token, {
 			httpOnly: true,
 		})

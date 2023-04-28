@@ -8,15 +8,13 @@ import { usePageParam } from '../../feed/hooks/use-page-param'
 import { useGetProfileQuery } from '../api/repository'
 import { ProfileInfo } from '../components/profile-info/profile-info'
 
-interface ProfilePageProps {}
-
 export const ProfilePage: React.FC = () => {
 	const { page } = usePageParam()
 	const { profile } = useParams()
 	const { pathname } = useLocation()
 
 	const { data: profileData, isLoading: profileLoading } = useGetProfileQuery({
-		username: profile!,
+		username: encodeURIComponent(profile!),
 	})
 
 	const { data, isLoading, isFetching, error } = useGetProfileFeedQuery({

@@ -1,25 +1,27 @@
 import mongoose from 'mongoose'
 
-const articleSchema = mongoose.Schema({
-	slug: { type: String, unique: true },
-	title: String,
-	body: String,
-	tags: {
-		type: [Object],
-		default: [],
-	},
-	createdAt: {
-		type: Date,
-		default: new Date(),
-	},
-	authorId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-	favoritedBy: [
-		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Tag',
+const articleSchema = new mongoose.Schema(
+	{
+		slug: { type: String, unique: true },
+		title: String,
+		body: String,
+		tags: {
+			type: [Object],
+			default: [],
 		},
-	],
-	comments: [String],
-})
+		authorId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+		favoritedBy: {
+			type: [String],
+			default: [],
+		},
+		comments: {
+			type: [String],
+			default: [],
+		},
+	},
+	{
+		timestamps: true,
+	}
+)
 
 export default mongoose.model('Article', articleSchema)

@@ -10,8 +10,6 @@ export default class UserDto {
 		this.username = model.username
 		this.email = model.email
 		this.isActivated = model.isActivated
-		this.following = userId
-			? model.followedBy.some(followingUser => followingUser === userId)
-			: false
+		this.following = model.followedBy.includes(userId)
 	}
 }

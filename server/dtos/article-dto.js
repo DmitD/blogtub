@@ -13,9 +13,7 @@ export default class ArticleDto {
 		this.body = model.body
 		this.tagList = model.tags.map(tag => tag.name)
 		this.createdAt = model.createdAt
-		this.favorited = userId
-			? model.favoritedBy.some(id => id === userId)
-			: false
+		this.favorited = model.favoritedBy.includes(userId)
 		this.favoritesCount = model.favoritedBy.length
 	}
 }
